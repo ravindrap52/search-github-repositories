@@ -1,7 +1,39 @@
 {
   "extends": "@quasar/app-vite/tsconfig-preset",
+  "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
   "compilerOptions": {
-    "baseUrl": "."
+    "composite": true,
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "baseUrl": ".",
+    "target": "ES2020", // Adjust if you need broader compatibility
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "lib": ["ES2020", "DOM"], // Adjust to minimize overhead
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true, // Additional optimization for library checking
+
+    /* Bundler mode */
+    "moduleResolution": "node", // Changed to "node" for wider compatibility
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "preserve",
+
+    /* Linting */
+    "strict": true,
+    "strictNullChecks": true, // Ensures safer null/undefined handling
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    /* Path Aliases */
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    /* Additional Options */
+    "allowJs": true, // Allow .js files
+    "resolveJsonModule": true, // Allow importing JSON files
+    "types": ["vite/client"]
   },
   "exclude": [
     "./dist",
@@ -9,6 +41,7 @@
     "./node_modules",
     "./src-capacitor",
     "./src-cordova",
-    "./quasar.config.*.temporary.compiled*"
+    "./quasar.config.*.temporary.compiled*",
+    "src/**/__tests__/*"
   ]
 }
