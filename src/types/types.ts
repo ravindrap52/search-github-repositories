@@ -1,11 +1,4 @@
-import type { HeaderNavItem } from '@/types/interface';
-
-export type HeaderNavItems = HeaderNavItem[];
-
+// types related to Button
 export type ButtonTypes = 'button' | 'submit' | 'reset';
-
-export type ThemeColors = 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'info' | string;
-
-export type OptionsForRoundedCorners = 'none' | 'sm' | 'md' | 'lg' | 'xl';
-
-export type ButtonVariants = 'text' | 'plain' | 'flat' | 'elevated' | 'tonal' | 'outlined';
+export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+export type ButtonPadding = 'none' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';

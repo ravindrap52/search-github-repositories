@@ -1,6 +1,6 @@
 // nav items for header
 
-import type { ButtonTypes, ThemeColors, OptionsForRoundedCorners, ButtonVariants } from '@/types/types';
+import type { ButtonTypes, ButtonSize } from '@/types/types';
 
 export interface HeaderNavItem {
   path: string;
@@ -10,13 +10,18 @@ export interface HeaderNavItem {
 // button props
 export interface ButtonProps {
   type?: ButtonTypes;
-  text?: string;
+  size?: string | ButtonSize;
+  flat?: boolean;
+  outline?: boolean;
+  rounded?: boolean;
+  round?: boolean;
+  square?: boolean;
+  color?: string;
+  textColor?: string;
+  label?: string | number;
   icon?: string;
-  disabled?: boolean;
-  color?: ThemeColors;
-  customClass?: string;
-  rounded?: OptionsForRoundedCorners;
-  variant?: ButtonVariants;
+  padding?: string;
+  disable?: boolean;
 }
 
 // combo item props
@@ -33,7 +38,6 @@ export interface InputProps {
   type?: string;
   rules?: ((v: string) => boolean | string)[];
 }
-
 
 // date props
 export interface DateProps {

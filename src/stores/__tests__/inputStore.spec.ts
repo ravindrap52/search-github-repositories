@@ -17,7 +17,7 @@ describe('The User Store', () => {
     expect(inputStore.inputValue).toBe('');
   });
   it('state should have the selected item as set', () => {
-    inputStore.setInputValue(inputValue)
+    inputStore.setInputValue(inputValue);
     expect(inputStore.inputValue).toBe(inputValue);
   });
 });
