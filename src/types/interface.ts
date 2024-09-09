@@ -2,9 +2,10 @@
 
 import type { ButtonTypes, ButtonSize } from '@/types/types';
 
-export interface HeaderNavItem {
-  path: string;
-  text: string;
+// heading props
+export interface HeadingProps {
+  cssClasses?: string;
+  textToDisplay?: string;
 }
 
 // button props
