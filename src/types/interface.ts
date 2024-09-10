@@ -1,6 +1,6 @@
 // nav items for header
 
-import type { ButtonTypes, ButtonSize } from '@/types/types';
+import type { ButtonTypes, ButtonSize, InputType } from '@/types/types';
 
 // heading props
 export interface HeadingProps {
@@ -25,22 +25,59 @@ export interface ButtonProps {
   disable?: boolean;
 }
 
-// combo item props
+// option item props
 export interface Item {
-  title: string;
+  label: string;
   value: string;
+}
+
+// selectbox props
+export interface SelectBoxProps {
+  selectBoxOptions?: Item[];
+  selectBoxModelValue?: Item;
+  outline?: boolean;
+  rounded?: boolean;
+  label?: string;
 }
 
 // input type props
 export interface InputProps {
-  inputModelValue?: string;
+  name?: string;
+  inputModelValue?: string | number | null;
   label?: string;
   placeholder?: string;
-  type?: string;
+  type?: InputType;
   rules?: ((v: string) => boolean | string)[];
+  lazyRules?: boolean;
+  debounce?: string | number;
+  maxLength?: string | number;
+  disable?: boolean;
+  readonly?: boolean;
+}
+
+interface RangeStart {
+  year: number;
+  month: number;
+  day: number;
+}
+
+interface RangeEnd {
+  from: RangeStart;
+  to: RangeStart;
 }
 
 // date props
 export interface DateProps {
   inputModelValue?: string;
+  name?: string;
+  range?: boolean;
+  rangeStart?: (from: RangeStart) => void;
+  rangeEnd?: (range: RangeEnd) => void;
+}
+
+// form props
+
+export interface FilterForm {
+  searchByRepository: string;
+  searchByStars: string
 }

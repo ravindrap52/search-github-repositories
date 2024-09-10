@@ -3,8 +3,8 @@ import { beforeEach, describe, expect, it } from 'vitest';
 
 import { useComboBoxStore } from '@/stores/comboboxStore';
 
-const item = { title: 'TypeScript', value: 'typescript' };
-const nonExistentItem = { title: 'node', value: 'node' };
+const item = { label: 'TypeScript', value: 'typescript' };
+const nonExistentItem = { label: 'node', value: 'node' };
 
 describe('The user store', () => {
   let comboboxStore: ReturnType<typeof useComboBoxStore>;

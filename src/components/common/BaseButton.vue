@@ -2,7 +2,7 @@
 import type { ButtonProps } from '@/types/interface';
 
 // Define component props
-withDefaults(defineProps<ButtonProps>(), {
+  withDefaults(defineProps<ButtonProps>(), {
   type: 'button',
   size: 'md',
   flat: false,
@@ -11,9 +11,7 @@ withDefaults(defineProps<ButtonProps>(), {
   round: false,
   square: false,
   color: 'primary',
-  textColor: 'textColor',
-  label: '',
-  icon: '',
+  textColor: '',
   padding: 'md',
   disable: false,
 });
@@ -44,6 +42,7 @@ const handleClick = (event: Event) => {
     :disable="disable"
     :padding="padding"
     @click="handleClick"
+    v-bind="$attrs"
   >
   </q-btn>
 </template>

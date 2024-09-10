@@ -6,9 +6,9 @@ import type { Item } from '@/types/interface';
 export const useComboBoxStore = defineStore('comboBoxStore', () => {
   // Initialize defaultItems
   const defaultItems = ref<Item[]>([
-    { title: 'JavaScript', value: 'javascript' },
-    { title: 'TypeScript', value: 'typescript' },
-    { title: 'Vue.js', value: 'vue' },
+    { label: 'JavaScript', value: 'javascript' },
+    { label: 'TypeScript', value: 'typescript' },
+    { label: 'Vue.js', value: 'vue' },
   ]);
 
   // selected items
