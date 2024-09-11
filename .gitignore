@@ -35,4 +35,4 @@ yarn-error.log*
 .vscode/
 
 # local .env files
-.env.local*
+
