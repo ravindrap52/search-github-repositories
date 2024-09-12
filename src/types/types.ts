@@ -1,3 +1,4 @@
+
 // types related to Button
 export type ButtonTypes = 'button' | 'submit' | 'reset';
 export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
@@ -17,3 +18,12 @@ export type InputType =
   | 'time'
   | 'date'
   | 'datetime-local';
+
+// types relatd to httpmethod
+export enum HttpMethod {
+  Get = 'GET',
+  Post = 'POST',
+  Put = 'PUT',
+  Delete = 'DELETE',
+}
+

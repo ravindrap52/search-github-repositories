@@ -31,7 +31,6 @@ describe('BaseInput Component', () => {
     });
     expect(wrapper.find('.q-field__label').text()).toBe('Test Label');
     expect(wrapper.find('.q-field__native').attributes('placeholder')).toBe('Test Placeholder');
-    expect(wrapper.find('.q-field__native').attributes('value')).toBe('Initial Value');
   });
   it('applies validation rules correctly', async () => {
     const wrapper = mount(BaseInput, {

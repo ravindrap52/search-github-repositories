@@ -1,5 +1,7 @@
-import axios, { AxiosInstance } from 'axios';
-import { boot } from 'quasar/wrappers';
+import axios, { AxiosInstance, AxiosResponse, AxiosRequestConfig } from 'axios';
+
+import type { Params } from '@/types/interface';
+import { HttpMethod } from '@/types/types';
 
 declare module 'vue' {
   interface ComponentCustomProperties {
@@ -14,18 +16,58 @@ declare module 'vue' {
 // good idea to move this instance creation inside of the
 // "export default () => {}" function below (which runs individually
 // for each client)
-const api = axios.create({ baseURL: 'https://api.example.com' });
 
-export default boot(({ app }) => {
-  // for use inside Vue files (Options API) through this.$axios and this.$api
 
-  app.config.globalProperties.$axios = axios;
-  // ^ ^ ^ this will allow you to use this.$axios (for Vue Options API form)
-  //       so you won't necessarily have to import axios in each vue file
+class HttpService {
+  private http: AxiosInstance;
+  private baseURL = process.env.BASE_URL || 'https://api.github.com/search/repositories';
+  constructor() {
+    this.http = axios.create({
+      baseURL: this.baseURL,
+      withCredentials: false,
+      headers: this.setupHeaders(),
+    });
+  }
+  // Set up request headers
+  private setupHeaders(hasAttachment = false) {
+    return hasAttachment
+      ? { 'Content-Type': 'multipart/form-data' }
+      : { 'Content-Type': 'application/json' };
+  }
+  // Handle HTTP requests
+  private async request<T>(
+    method: HttpMethod,
+    url: string,
+    options: AxiosRequestConfig,
+  ): Promise<T> {
+    try {
+      const response: AxiosResponse<T> = await this.http.request<T>({
+        method,
+        url,
+        ...options,
+      });
 
-  app.config.globalProperties.$api = api;
-  // ^ ^ ^ this will allow you to use this.$api (for Vue Options API form)
-  //       so you can easily perform requests against your app's API
-});
+      return response.data;
+    } catch (error) {
+      return this.normalizeError(error);
+    }
+  }
+  // Perform GET request
+  public async get<T>(url: string, params?: Params, hasAttachment = false): Promise<T> {
+    return this.request<T>(HttpMethod.Get, url, {
+      params,
+      headers: this.setupHeaders(hasAttachment),
+    });
+  }
+  // error handling
+  private normalizeError(error: unknown): Promise<never> {
+    if (axios.isAxiosError(error)) {
+      console.error('Axios Error:', error.response?.data || error.message);
+    } else {
+      console.error('Unknown Error:', error);
+    }
+    return Promise.reject(error);
+  }
+}
 
-export { api };
+export { HttpService  };

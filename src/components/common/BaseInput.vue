@@ -10,6 +10,7 @@ withDefaults(defineProps<InputProps>(), {
   rules: () => [],
   type: 'text',
   lazyRules: false,
+  outline: true,
 });
 
 // define emit

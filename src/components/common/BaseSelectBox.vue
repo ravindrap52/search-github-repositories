@@ -1,52 +1,37 @@
 <script setup lang="ts">
-import { storeToRefs } from 'pinia';
 import { ref } from 'vue';
 
-import { useComboBoxStore } from '@/stores/comboboxStore';
 import { Item, SelectBoxProps } from '@/types/interface';
 
-const comboboxStore = useComboBoxStore();
-
-const { defaultItems, selectedItems } = storeToRefs(comboboxStore);
-
-// model value for selected items
-const internalModelValue = ref<Item[]>([]);
-
-const props = withDefaults(defineProps<SelectBoxProps>(), {
-  selectBoxOptions: () => [],
-  selectBoxModelValue: undefined,
+// Define component props
+withDefaults(defineProps<SelectBoxProps>(), {
+  selectBoxDefaultOptions: () => [],
   outline: true,
   rounded: false,
   label: 'Select',
 });
-// set default options
-const selectOptions = props.selectBoxOptions.length ? props.selectBoxOptions : defaultItems.value;
 
-function updateSelectedItems() {
-  const selectedSet = new Set(internalModelValue.value.map((item) => item.value));
-  const storeSet = new Set(selectedItems.value.map((item) => item.value));
+// define emit
+const emit = defineEmits<{ 'update:modelValue': [value: Item[]] }>();
 
-  // Items to add and remove
-  const itemsToAdd = internalModelValue.value.filter((item) => !storeSet.has(item.value));
-  const itemsToRemove = selectedItems.value.filter((item) => !selectedSet.has(item.value));
+// model value for selected items
+const internalModelValue = ref<Item[]>([]);
 
-  // Update store
-  itemsToAdd.forEach((item) => comboboxStore.addItem(item));
-  itemsToRemove.forEach((item) => comboboxStore.removeItem(item));
-}
-function removeItem(item: string) {
-  internalModelValue.value = internalModelValue.value.filter((sl) => sl.value !== item);
-  updateSelectedItems();
+// updating the selected items
+function updateSelectedItems(value: Item[]) {
+  const validItems = value.filter(Boolean) as Item[];
+  internalModelValue.value = validItems;
+  emit('update:modelValue', validItems);
 }
 </script>
 
 <template>
   <q-select
-    :outlined="props.outline"
-    :rounded="props.rounded"
+    :outlined="outline"
+    :rounded="rounded"
     v-model="internalModelValue"
-    :options="selectOptions"
-    :label="props.label"
+    :options="selectBoxDefaultOptions"
+    :label="label"
     @update:model-value="updateSelectedItems"
     v-bind="$attrs"
     aria-labelledby="select-label"
@@ -56,10 +41,11 @@ function removeItem(item: string) {
       <q-chip
         removable
         dense
-        @remove="removeItem(scope.opt.value)"
+        @remove="scope.removeAtIndex(scope.index)"
         color="white"
         text-color="secondary"
         class="q-ma-none"
+        v-if="scope.opt"
       >
         {{ scope.opt.label }}
       </q-chip>
