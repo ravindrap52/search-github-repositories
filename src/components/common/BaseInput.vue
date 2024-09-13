@@ -39,5 +39,6 @@ function updateInputValue(value: string | number | null) {
     v-bind="$attrs"
     variant="outlined"
     @update:model-value="updateInputValue"
+    :hide-bottom-space="true"
   />
 </template>

@@ -54,17 +54,6 @@ export interface InputProps {
   outline?: boolean;
 }
 
-interface RangeStart {
-  year: number;
-  month: number;
-  day: number;
-}
-
-interface RangeEnd {
-  from: RangeStart;
-  to: RangeStart;
-}
-
 export interface Range {
   from: string;
   to: string;
@@ -73,17 +62,17 @@ export interface Range {
 // date props
 export interface DateProps {
   inputModelValue?: string;
-  name?: string;
-  range?: boolean;
-  rangeStart?: (from: RangeStart) => void;
-  rangeEnd?: (range: RangeEnd) => void;
+  title?: string;
+  mask?: string;
 }
 
 // form props
 export interface FilterForm {
   searchByDefaultRepositories: Item[];
   searchByRepository: string;
-  searchByStars: string;
+  searchByStars: number;
+  startDate: string;
+  endDate: string;
 }
 
 //
@@ -99,7 +88,7 @@ export interface FormData {
 // url
 export interface UrlType {
   objValues: Array<string>;
-  searchByStars: string;
+  searchByStars: number;
 }
 
 // GitHubRepository
@@ -107,4 +96,11 @@ export interface GitHubRepository {
   id: number;
   name: string;
   full_name: string;
+}
+
+// date format props
+export interface DateParams {
+  dateParam: string;
+  dateFormat: string;
+  options?: object;
 }

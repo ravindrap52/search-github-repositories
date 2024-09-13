@@ -1,10 +1,10 @@
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
+/* import { ref } from 'vue';
 
-import { getDefaultDates } from '@/utils/getDefaultDates';
+import { getDefaultDates } from '@/utils/getDefaultDates'; */
 
 export const useDateStore = defineStore('dateStore', () => {
-  const { endDate, startDate } = getDefaultDates();
+  /* const { endDate, startDate } = getDefaultDates();
 
   // startdate
   const startDateRef = ref<string>(startDate);
@@ -20,5 +20,5 @@ export const useDateStore = defineStore('dateStore', () => {
     setEndDate(date: string) {
       endDateRef.value = date;
     },
-  };
+  }; */
 });

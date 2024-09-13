@@ -1,54 +1,44 @@
 <script setup lang="ts">
-import { useQuery } from '@tanstack/vue-query';
-import { reactive, computed, ref } from 'vue';
+import { reactive } from 'vue';
 
 import BaseButton from '@/components/common/BaseButton.vue';
-// import BaseDatePicker from '@/components/common/BaseDatePicker.vue';
+import BaseDatePicker from '@/components/common/BaseDatePicker.vue';
 import BaseInput from '@/components/common/BaseInput.vue';
 import BaseSelectBox from '@/components/common/BaseSelectBox.vue';
-import { useSearchByMultipleFilters } from '@/composables/useSearchByMultipleFilters';
+import { useFormStore } from '@/stores/formStore';
 import type { FilterForm } from '@/types/interface';
-import { selectBoxDefaultItems } from '@/utils/constants';
+import { dateFormat, selectBoxDefaultItems } from '@/utils/constants';
+import { getFormattedDate } from '@/utils/dateUtils';
 import { isAlphanumeric, isNumeric } from '@/utils/formValidation';
+
+// get today's date in string format
+const date = new Date().toDateString();
+
+const formStore = useFormStore();
 
 // filter form
 const filterForm = reactive<FilterForm>({
   searchByDefaultRepositories: [],
   searchByRepository: '',
-  searchByStars: '',
+  searchByStars: 100,
+  startDate: getFormattedDate({
+    dateParam: date,
+    dateFormat,
+    options: { months: 6 },
+  }),
+  endDate: getFormattedDate({
+    dateParam: date,
+    dateFormat,
+  }),
 });
 
-// A ref to control whether the query should be enabled
-const isQueryEnabled = ref(false);
-
-// A ref to hold the query key for submission
-const queryKey = ref<string[]>([]);
-
-// Create a computed query key
-const filterQueryKey = computed(() => [
-  'filterForm',
-  filterForm.searchByDefaultRepositories.map((item) => item.value).join(','),
-  filterForm.searchByRepository,
-  filterForm.searchByStars,
-]);
-
-// Define the query function
-const fetchFilteredData = async () => {
-  const data = await useSearchByMultipleFilters({ filterForm });
-  return data;
-};
-
-// Use useQuery hook
-const query = useQuery({
-  queryKey: queryKey,
-  queryFn: fetchFilteredData,
-  staleTime: 5 * 60 * 1000, // Data remains fresh 1059143191 for 5 minutes
-  enabled: isQueryEnabled,
-});
-console.log(query);
 function onSubmit() {
-  queryKey.value = filterQueryKey.value;
-  isQueryEnabled.value = true;
+  // Update the store with the form values
+  formStore.setSelectedItems(filterForm.searchByDefaultRepositories);
+  formStore.setInputValueAsText(filterForm.searchByRepository);
+  formStore.setInputValueAsNumber(filterForm.searchByStars);
+  formStore.setStartDate(filterForm.startDate);
+  formStore.setEndDate(filterForm.endDate);
 }
 </script>
 
@@ -77,11 +67,22 @@ function onSubmit() {
           label="Search By Number of Stars"
           :lazy-rules="true"
           :rules="isNumeric"
-          v-model="filterForm.searchByStars"
+          v-model:model-value="filterForm.searchByStars"
         />
       </div>
       <div class="tw-pb-4">
-        <!-- <BaseDatePicker /> -->
+        <BaseDatePicker
+          v-model:model-value="filterForm.startDate"
+          title="Start Date"
+          :inputModelValue="filterForm.startDate"
+        />
+      </div>
+      <div class="tw-pb-4">
+        <BaseDatePicker
+          v-model:model-value="filterForm.endDate"
+          title="End Date"
+          :inputModelValue="filterForm.endDate"
+        />
       </div>
       <div>
         <BaseButton

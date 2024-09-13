@@ -1,4 +1,4 @@
-import { formatDate } from '@/utils/dateUtils';
+/* import { formatDate } from '@/utils/dateUtils';
 
 export function getDefaultDates(): { endDate: string; startDate: string } {
   const today = new Date();
@@ -7,4 +7,4 @@ export function getDefaultDates(): { endDate: string; startDate: string } {
     startDate: formatDate(yesterday),
     endDate: formatDate(today),
   };
-}
+} */

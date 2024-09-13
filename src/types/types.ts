@@ -1,4 +1,3 @@
-
 // types related to Button
 export type ButtonTypes = 'button' | 'submit' | 'reset';
 export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
@@ -26,4 +25,5 @@ export enum HttpMethod {
   Put = 'PUT',
   Delete = 'DELETE',
 }
-
+// types related to input value
+export type InputValueType = string | number | null;
