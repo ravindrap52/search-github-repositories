@@ -7,15 +7,11 @@ const httpService = new HttpService();
 
 export async function useSearchByMultipleFilters<T = GitHubRepository>({
   searchByDefaultRepositories,
-  searchByRepository,
   searchByStars,
 }: FilterForm): Promise<T[]> {
 
   // Get values from the object
   const objValues = getObjectValues(searchByDefaultRepositories);
-  if (searchByRepository) {
-    objValues.push(searchByRepository);
-  }
   // Construct URLs
   const urls = constructUrl({ objValues, searchByStars });
 
