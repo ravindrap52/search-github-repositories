@@ -3,7 +3,7 @@
     <!-- Show LoadingSkeleton while data is being fetched -->
     <LoadingSkeleton v-if="query.isFetching.value" />
     <!-- Show ListComponent only when data is loaded successfully -->
-    <ListComponent v-else-if="query.isSuccess.value" :data="query.data.value" />
+    <ListComponent v-else-if="query.isSuccess.value" :data="query.data.value || []" />
     <!-- Show an error message if the query fails -->
     <div v-else-if="query.isError">
       <p>Error loading data: {{ query.error }}</p>

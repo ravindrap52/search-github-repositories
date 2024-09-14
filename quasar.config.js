@@ -55,7 +55,7 @@ module.exports = configure(function (/* ctx */) {
 
       // publicPath: '/',
       // analyze: true,
-      env: require('dotenv').config({ path: ['.env', '.env.local', '.env.production'], override: true }).parsed,
+      env: require('dotenv').config({ path: ['.env', '.env.local', '.env.production', '.env.testing'], override: true }).parsed,
       // rawDefine: {}
       // ignorePublicFolder: true,
       minify: 'terser',

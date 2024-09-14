@@ -18,11 +18,9 @@
     </Header>
     <!-- imagine side bar is like a container, sidebar will have a drawer, and drawer will have a form
     and form contains filter item -->
-    <SideBar v-if="leftDrawerOpen">
-      <BaseDrawer>
+      <BaseDrawer v-model="leftDrawerOpen">
         <BaseForm />
       </BaseDrawer>
-    </SideBar>
     <!-- displaying the route content -->
     <q-page-container>
       <router-view />
@@ -38,11 +36,11 @@ import BaseDrawer from '@/components/common/BaseDrawer.vue';
 import BaseForm from '@/components/common/BaseForm.vue';
 import Header from '@/components/common/Header.vue';
 import Heading from '@/components/common/Heading.vue';
-import SideBar from '@/components/common/SideBar.vue';
 
 const leftDrawerOpen = ref<boolean>(true);
 
 function toggleLeftDrawer() {
+  console.log(1, leftDrawerOpen.value);
   leftDrawerOpen.value = !leftDrawerOpen.value;
 }
 

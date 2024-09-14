@@ -3,7 +3,7 @@
     <div>
       <div style="font-size: 30vh">404</div>
 
-      <div class="text-h2" style="opacity: 0.4">Oops. Nothing here...</div>
+      <div class="text-h2" style="opacity: 0.4">Page not found</div>
 
       <q-btn
         class="q-mt-xl"
@@ -17,9 +17,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-defineOptions({
-  name: 'ErrorNotFound',
-});
-</script>

@@ -2,7 +2,6 @@
 import { ref } from 'vue';
 
 import { DateProps } from '@/types/interface';
-import { InputValueType } from '@/types/types';
 
 // Define component props
 const props = withDefaults(defineProps<DateProps>(), {
@@ -12,7 +11,7 @@ const props = withDefaults(defineProps<DateProps>(), {
 });
 
 // define emit
-const emit = defineEmits<{ 'update:modelValue': [value: InputValueType] }>();
+const emit = defineEmits<{ 'update:modelValue': [value: string] }>();
 
 // model value for input items
 const date = ref<string>(props.inputModelValue);

@@ -1,5 +1,6 @@
 import { quasar, transformAssetUrls } from '@quasar/vite-plugin';
 import vue from '@vitejs/plugin-vue';
+import { loadEnv } from 'vite'
 import tsconfigPaths from 'vite-tsconfig-paths';
 import { defineConfig, UserConfig } from 'vitest/config';
 
@@ -14,7 +15,12 @@ export default defineConfig({
       'src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}',
       'test/vitest/__tests__/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}',
     ],
+    coverage: {
+      provider: 'istanbul',
+      reporter: ['text', 'json', 'html'],
+    },
     globals: true,
+    env: loadEnv('', process.cwd(), ''),
   },
   plugins: [
     vue({

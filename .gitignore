@@ -2,6 +2,9 @@
 .thumbs.db
 node_modules
 
+# ignoring test coverage
+coverage/
+
 # Quasar core related directories
 .quasar
 /dist

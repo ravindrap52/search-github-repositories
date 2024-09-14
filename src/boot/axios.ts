@@ -17,7 +17,6 @@ declare module 'vue' {
 // "export default () => {}" function below (which runs individually
 // for each client)
 
-
 class HttpService {
   private http: AxiosInstance;
   private baseURL = process.env.BASE_URL || 'https://api.github.com/search/repositories';
@@ -29,10 +28,12 @@ class HttpService {
     });
   }
   // Set up request headers
-  private setupHeaders(hasAttachment = false) {
-    return hasAttachment
-      ? { 'Content-Type': 'multipart/form-data' }
-      : { 'Content-Type': 'application/json' };
+  private setupHeaders() {
+    return { 'Content-Type': 'application/json' };
+  }
+  // Public method to get the base URL for testing
+  public getBaseURL(): string {
+    return this.baseURL;
   }
   // Handle HTTP requests
   private async request<T>(
@@ -53,10 +54,10 @@ class HttpService {
     }
   }
   // Perform GET request
-  public async get<T>(url: string, params?: Params, hasAttachment = false): Promise<T> {
+  public async get<T>(url: string, params?: Params): Promise<T> {
     return this.request<T>(HttpMethod.Get, url, {
       params,
-      headers: this.setupHeaders(hasAttachment),
+      headers: this.setupHeaders(),
     });
   }
   // error handling
@@ -70,4 +71,4 @@ class HttpService {
   }
 }
 
-export { HttpService  };
+export { HttpService };

@@ -3,12 +3,13 @@ import type { FilterForm, GitHubRepository } from '@/types/interface';
 import { constructUrl } from '@/utils/constructUrl';
 import { getObjectValues } from '@/utils/getObjectValues';
 
+const httpService = new HttpService();
+
 export async function useSearchByMultipleFilters<T = GitHubRepository>({
   searchByDefaultRepositories,
   searchByRepository,
   searchByStars,
 }: FilterForm): Promise<T[]> {
-  const httpService = new HttpService();
 
   // Get values from the object
   const objValues = getObjectValues(searchByDefaultRepositories);
