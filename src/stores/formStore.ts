@@ -2,21 +2,40 @@ import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
 import type { Item } from '@/types/interface';
-import { InputValueType } from '@/types/types';
+import { selectBoxDefaultItems } from '@/utils/constants';
+import { dateFormat } from '@/utils/constants';
+import { getFormattedDate } from '@/utils/dateUtils';
+
+// get today's date in string format
+const date = new Date().toDateString();
 
 export const useFormStore = defineStore('formStore', () => {
+  // default items
+  const defaultSelectBoxItems = selectBoxDefaultItems;
   // selected items
-  const selectedtems = ref<Item[]>([]);
+  const selectedtems = ref<Item[]>(defaultSelectBoxItems);
   // for input value text
-  const inputValueAsText = ref<InputValueType>('');
+  const inputValueAsText = ref<string>('');
   // for input value text
-  const inputValueAsNumber = ref<InputValueType>(100);
+  const inputValueAsNumber = ref<number>(100);
   // startdate
-  const startDate = ref<string>('');
+  const startDate = ref<string>(
+    getFormattedDate({
+      dateParam: date,
+      dateFormat,
+      options: { months: 6 },
+    }),
+  );
   // enddate
-  const endDate = ref<string>('');
+  const endDate = ref<string>(
+    getFormattedDate({
+      dateParam: date,
+      dateFormat,
+    }),
+  );
 
   return {
+    defaultSelectBoxItems,
     selectedtems,
     inputValueAsText,
     inputValueAsNumber,
