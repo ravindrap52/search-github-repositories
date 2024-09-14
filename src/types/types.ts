@@ -25,5 +25,3 @@ export enum HttpMethod {
   Put = 'PUT',
   Delete = 'DELETE',
 }
-// types related to input value
-export type InputValueType = string | number | null;

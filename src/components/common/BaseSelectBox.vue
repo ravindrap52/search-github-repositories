@@ -4,7 +4,7 @@ import { ref } from 'vue';
 import { Item, SelectBoxProps } from '@/types/interface';
 
 // Define component props
-withDefaults(defineProps<SelectBoxProps>(), {
+const props = withDefaults(defineProps<SelectBoxProps>(), {
   selectBoxDefaultOptions: () => [],
   outline: true,
   rounded: false,
@@ -15,8 +15,7 @@ withDefaults(defineProps<SelectBoxProps>(), {
 const emit = defineEmits<{ 'update:modelValue': [value: Item[]] }>();
 
 // model value for selected items
-const internalModelValue = ref<Item[]>([]);
-
+const internalModelValue = ref<Item[]>(props.selectBoxDefaultOptions);
 // updating the selected items
 function updateSelectedItems(value: Item[]) {
   const validItems = value.filter(Boolean) as Item[];
@@ -27,11 +26,11 @@ function updateSelectedItems(value: Item[]) {
 
 <template>
   <q-select
-    :outlined="outline"
-    :rounded="rounded"
+    :outlined="props.outline"
+    :rounded="props.rounded"
     v-model="internalModelValue"
-    :options="selectBoxDefaultOptions"
-    :label="label"
+    :options="props.selectBoxDefaultOptions"
+    :label="props.label"
     @update:model-value="updateSelectedItems"
     v-bind="$attrs"
     aria-labelledby="select-label"
@@ -45,7 +44,6 @@ function updateSelectedItems(value: Item[]) {
         color="white"
         text-color="secondary"
         class="q-ma-none"
-        v-if="scope.opt"
       >
         {{ scope.opt.label }}
       </q-chip>

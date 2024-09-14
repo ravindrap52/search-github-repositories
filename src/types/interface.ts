@@ -91,11 +91,16 @@ export interface UrlType {
   searchByStars: number;
 }
 
+// GitHubRepository items
+export interface RepositoryItems {
+  [key: string]: string;
+}
+
 // GitHubRepository
 export interface GitHubRepository {
-  id: number;
-  name: string;
-  full_name: string;
+  total_count: number;
+  incomplete_results: boolean;
+  items: RepositoryItems[];
 }
 
 // date format props

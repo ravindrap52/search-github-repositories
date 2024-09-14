@@ -1,25 +1,20 @@
 import { HttpService } from '@/boot/axios';
-import type { FormData, GitHubRepository } from '@/types/interface';
+import type { FilterForm, GitHubRepository } from '@/types/interface';
 import { constructUrl } from '@/utils/constructUrl';
 import { getObjectValues } from '@/utils/getObjectValues';
 
 export async function useSearchByMultipleFilters<T = GitHubRepository>({
-  filterForm,
-}: FormData): Promise<T[]> {
-  if (!filterForm) {
-    throw new Error('Filter form is required');
-  }
-
+  searchByDefaultRepositories,
+  searchByRepository,
+  searchByStars,
+}: FilterForm): Promise<T[]> {
   const httpService = new HttpService();
-
-  const { searchByDefaultRepositories, searchByRepository, searchByStars } = filterForm;
 
   // Get values from the object
   const objValues = getObjectValues(searchByDefaultRepositories);
   if (searchByRepository) {
     objValues.push(searchByRepository);
   }
-
   // Construct URLs
   const urls = constructUrl({ objValues, searchByStars });
 

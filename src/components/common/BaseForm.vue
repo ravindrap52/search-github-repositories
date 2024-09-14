@@ -7,29 +7,18 @@ import BaseInput from '@/components/common/BaseInput.vue';
 import BaseSelectBox from '@/components/common/BaseSelectBox.vue';
 import { useFormStore } from '@/stores/formStore';
 import type { FilterForm } from '@/types/interface';
-import { dateFormat, selectBoxDefaultItems } from '@/utils/constants';
-import { getFormattedDate } from '@/utils/dateUtils';
 import { isAlphanumeric, isNumeric } from '@/utils/formValidation';
 
-// get today's date in string format
-const date = new Date().toDateString();
-
+// form store to store form values
 const formStore = useFormStore();
 
 // filter form
 const filterForm = reactive<FilterForm>({
-  searchByDefaultRepositories: [],
+  searchByDefaultRepositories: formStore.defaultSelectBoxItems,
   searchByRepository: '',
   searchByStars: 100,
-  startDate: getFormattedDate({
-    dateParam: date,
-    dateFormat,
-    options: { months: 6 },
-  }),
-  endDate: getFormattedDate({
-    dateParam: date,
-    dateFormat,
-  }),
+  startDate: formStore.startDate,
+  endDate: formStore.endDate,
 });
 
 function onSubmit() {
@@ -47,7 +36,7 @@ function onSubmit() {
     <q-form @submit.prevent="onSubmit">
       <div class="tw-pt-4 tw-pb-4">
         <BaseSelectBox
-          :selectBoxDefaultOptions="selectBoxDefaultItems"
+          :selectBoxDefaultOptions="filterForm.searchByDefaultRepositories"
           label="Filter By Default Repositories"
           usechips
           multiple
