@@ -7,7 +7,7 @@ import BaseInput from '@/components/common/BaseInput.vue';
 import BaseSelectBox from '@/components/common/BaseSelectBox.vue';
 import { useFormStore } from '@/stores/formStore';
 import type { FilterForm } from '@/types/interface';
-import { isAlphanumeric, isNumeric } from '@/utils/formValidation';
+import { isNumeric } from '@/utils/formValidation';
 
 // form store to store form values
 const formStore = useFormStore();
@@ -15,7 +15,7 @@ const formStore = useFormStore();
 // filter form
 const filterForm = reactive<FilterForm>({
   searchByDefaultRepositories: formStore.defaultSelectBoxItems,
-  searchByRepository: '',
+  selectedRepository: formStore.selectedtems,
   searchByStars: 100,
   startDate: formStore.startDate,
   endDate: formStore.endDate,
@@ -23,8 +23,7 @@ const filterForm = reactive<FilterForm>({
 
 function onSubmit() {
   // Update the store with the form values
-  formStore.setSelectedItems(filterForm.searchByDefaultRepositories);
-  formStore.setInputValueAsText(filterForm.searchByRepository);
+  formStore.setSelectedItems(filterForm.selectedRepository);
   formStore.setInputValueAsNumber(filterForm.searchByStars);
   formStore.setStartDate(filterForm.startDate);
   formStore.setEndDate(filterForm.endDate);
@@ -40,15 +39,7 @@ function onSubmit() {
           label="Filter By Default Repositories"
           usechips
           multiple
-          v-model:model-value="filterForm.searchByDefaultRepositories"
-        />
-      </div>
-      <div class="tw-pb-4">
-        <BaseInput
-          label="Search By Repository"
-          :lazy-rules="true"
-          :rules="isAlphanumeric"
-          v-model:model-value="filterForm.searchByRepository"
+          v-model:model-value="filterForm.selectedRepository"
         />
       </div>
       <div class="tw-pb-4">

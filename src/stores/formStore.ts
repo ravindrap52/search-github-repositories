@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
 import type { Item } from '@/types/interface';
-import { selectBoxDefaultItems } from '@/utils/constants';
+import { selectBoxDefaultItems, defaultSelectedItem } from '@/utils/constants';
 import { dateFormat } from '@/utils/constants';
 import { getFormattedDate } from '@/utils/dateUtils';
 
@@ -13,7 +13,7 @@ export const useFormStore = defineStore('formStore', () => {
   // default items
   const defaultSelectBoxItems = selectBoxDefaultItems;
   // selected items
-  const selectedtems = ref<Item[]>(defaultSelectBoxItems);
+  const selectedtems = ref<Item[]>(defaultSelectedItem);
   // for input value text
   const inputValueAsText = ref<string>('');
   // for input value text

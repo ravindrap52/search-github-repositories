@@ -32,6 +32,7 @@ export interface Item {
 // selectbox props
 export interface SelectBoxProps {
   selectBoxDefaultOptions?: Item[];
+  defaultSelectedOption?: Item[];
   selectBoxModelValue?: Item;
   outline?: boolean;
   rounded?: boolean;
@@ -69,7 +70,7 @@ export interface DateProps {
 // form props
 export interface FilterForm {
   searchByDefaultRepositories: Item[];
-  searchByRepository: string;
+  selectedRepository : Item[];
   searchByStars: number;
   startDate: string;
   endDate: string;

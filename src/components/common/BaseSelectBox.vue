@@ -6,6 +6,7 @@ import { Item, SelectBoxProps } from '@/types/interface';
 // Define component props
 const props = withDefaults(defineProps<SelectBoxProps>(), {
   selectBoxDefaultOptions: () => [],
+  defaultSelectedOption: () => [],
   outline: true,
   rounded: false,
   label: 'Select',
@@ -15,12 +16,12 @@ const props = withDefaults(defineProps<SelectBoxProps>(), {
 const emit = defineEmits<{ 'update:modelValue': [value: Item[]] }>();
 
 // model value for selected items
-const internalModelValue = ref<Item[]>(props.selectBoxDefaultOptions);
+const internalModelValue = ref<Item[]>([]);
+
 // updating the selected items
 function updateSelectedItems(value: Item[]) {
-  const validItems = value.filter(Boolean) as Item[];
-  internalModelValue.value = validItems;
-  emit('update:modelValue', validItems);
+  internalModelValue.value = value;
+  emit('update:modelValue', value);
 }
 </script>
 
