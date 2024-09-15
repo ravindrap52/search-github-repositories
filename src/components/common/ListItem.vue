@@ -28,7 +28,7 @@ const props = defineProps<{
             </q-item-label>
             <q-item-label class="tw-pl-4 tw-pt-4 tw-pb-4"
               ><span class="tw-pr-1">URL:</span>
-              <q-btn target="_blank" label="To Docs index" outline color="purple" :href="item.html_url" />
+              <q-btn target="_blank" label="Naviage to Github" outline flat color="primary" :href="item.html_url" :no-caps="true" />
             </q-item-label>
           </q-item-section>
         </q-item>
