@@ -1,18 +1,60 @@
 <script setup lang="ts">
+import { useInfiniteQuery } from '@tanstack/vue-query';
+import { storeToRefs } from 'pinia';
+import { computed } from 'vue';
 
 import ListItem from '@/components/common/ListItem.vue';
-import { GitHubRepository } from '@/types/interface';
+import LoadingSkeleton from '@/components/common/LoadingSkeleton.vue';
+import { useSearchByMultipleFilters } from '@/composables/useSearchByMultipleFilters';
+import { useFormStore } from '@/stores/formStore';
 
 const props = defineProps<{
-  data: GitHubRepository[]
-}>()
+  repositoryName: string;
+}>();
+
+const formStore = useFormStore();
+
+const { inputValueAsNumber, startDate, endDate } = storeToRefs(formStore);
+
+// Create a computed query key
+const filterQueryKey = computed(() => [
+  'projects',
+  props.repositoryName,
+  inputValueAsNumber.value,
+  startDate.value,
+  endDate.value,
+]);
+
+// Define the query function
+const fetchFilteredData = async ({ pageParam = 1 }) => {
+  const data = await useSearchByMultipleFilters({
+    repositoryName: props.repositoryName,
+    numberOfStars: inputValueAsNumber.value,
+    page: pageParam,
+    startDate: startDate.value.replace(/\//g, '-'),
+    endDate: endDate.value.replace(/\//g, '-'),
+  });
+  return data;
+};
+const { data, error, isFetching, isError } =
+  useInfiniteQuery({
+    queryKey: filterQueryKey,
+    queryFn: fetchFilteredData,
+    staleTime: 5 * 60 * 1000,
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, pages) => {
+      return lastPage?.items.length === 10 ? pages.length + 1 : undefined;
+    },
+  });
+
 
 </script>
 
 <template>
-  <div class="row tw-gap-4">
-    <div class="col-xs-12 col-sm-6 col-md-4" v-for="item in props.data" :key="item.total_count">
-      <ListItem :items="item.items" />
-    </div>
+  <!-- Show LoadingSkeleton while data is being fetched -->
+  <LoadingSkeleton v-if="isFetching" />
+  <span v-else-if="isError">Error: {{ error?.message }}</span>
+  <div v-for="(repositories, index) in data.pages" :key="index" v-else-if="data">
+    <ListItem :repos="repositories?.items || []" />
   </div>
 </template>

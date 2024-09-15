@@ -13,4 +13,5 @@ export const defaultSelectedItem: Item[] = [
 //TODO:
 // this should come from settings page,
 // by default we will take from browser locale
+// currently github supports on year-month-date format
 export const dateFormat = 'YYYY/MM/DD';

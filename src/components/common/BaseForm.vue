@@ -24,7 +24,7 @@ const filterForm = reactive<FilterForm>({
 function onSubmit() {
   // Update the store with the form values
   formStore.setSelectedItems(filterForm.selectedRepository);
-  formStore.setInputValueAsNumber(filterForm.searchByStars);
+  formStore.setInputValueAsNumber(Number(filterForm.searchByStars));
   formStore.setStartDate(filterForm.startDate);
   formStore.setEndDate(filterForm.endDate);
 }

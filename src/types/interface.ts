@@ -81,15 +81,11 @@ export interface Params {
   [key: string]: string | number;
 }
 
-// form data
-export interface FormData {
-  filterForm?: FilterForm;
-}
-
 // url
 export interface UrlType {
   objValues: Array<string>;
   searchByStars: number;
+  page: number;
 }
 
 // GitHubRepository items

@@ -1,35 +1,32 @@
 import { HttpService } from '@/boot/axios';
-import type { FilterForm, GitHubRepository } from '@/types/interface';
-import { constructUrl } from '@/utils/constructUrl';
-import { getObjectValues } from '@/utils/getObjectValues';
+import  type { GitHubRepository } from '@/types/interface';
 
+interface ApiParams {
+  repositoryName: string;
+  numberOfStars: number;
+  page: number;
+  startDate: string;
+  endDate: string;
+}
 const httpService = new HttpService();
 
 export async function useSearchByMultipleFilters<T = GitHubRepository>({
-  searchByDefaultRepositories,
-  searchByStars,
-}: FilterForm): Promise<T[]> {
-
-  // Get values from the object
-  const objValues = getObjectValues(searchByDefaultRepositories);
-  // Construct URLs
-  const urls = constructUrl({ objValues, searchByStars });
+  repositoryName,
+  numberOfStars,
+  page,
+  startDate,
+  endDate,
+}: ApiParams): Promise<T | null> {
+  //TODO: encode the url
+  const url = `${process.env.BASE_URL}?q=${repositoryName}+stars:<${numberOfStars}+created:${startDate}..${endDate}&page=${page}&per_page=10&sort=stars&order=desc`;
 
   try {
     // Make the API calls
-    const results = await Promise.allSettled(
-      urls.map((url) => httpService.get<GitHubRepository[]>(url)),
-    );
-
-    // Filter out fulfilled responses and map to the result
-    return results
-      .filter(
-        (result): result is PromiseFulfilledResult<GitHubRepository[]> =>
-          result.status === 'fulfilled',
-      )
-      .flatMap((result) => result.value as T[]);
+    const results = await httpService.get<GitHubRepository>(url);
+    return results as T;
   } catch (error) {
+    //TODO: handle the error
     console.error('An error occurred during the API calls:', error);
-    return []; // Return an empty array or handle the error as appropriate
+    return null;
   }
 }
