@@ -8,6 +8,7 @@ import LoadingSkeleton from '@/components/common/LoadingSkeleton.vue';
 import { useSearchByMultipleFilters } from '@/composables/useSearchByMultipleFilters';
 import { useFormStore } from '@/stores/formStore';
 
+
 const props = defineProps<{
   repositoryName: string;
 }>();
@@ -53,7 +54,10 @@ const { data, error, isFetching, isError } =
 <template>
   <!-- Show LoadingSkeleton while data is being fetched -->
   <LoadingSkeleton v-if="isFetching" />
-  <span v-else-if="isError">Error: {{ error?.message }}</span>
+
+  <!-- Showing error while data is being fetched -->
+  <div v-else-if="isError">Error: {{ error?.message }}</div>
+
   <div v-for="(repositories, index) in data.pages" :key="index" v-else-if="data">
     <ListItem :repoName="props.repositoryName" :repos="repositories?.items || []" />
   </div>

@@ -7,7 +7,7 @@
       />
     </div>
     <div v-if="selectedtems.length < 1">
-      <Heading textToDisplay="No Data Available" class="tw-p-4 tw-text-2xl" />
+      <Heading :textToDisplay="t('noDataAvailable')" class="tw-p-4 tw-text-2xl" />
     </div>
     <!-- ListComponent -->
     <div class="row tw-gap-4">

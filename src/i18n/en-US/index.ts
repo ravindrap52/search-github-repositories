@@ -4,6 +4,6 @@
 export default {
   failed: 'Action failed',
   success: 'Action was successful',
-  textHeading: 'Github Repositories between {0} and {1} with atleast {2} stars'
+  textHeading: 'Github Repositories between {0} and {1} with atleast {2} stars',
+  noDataAvailable: 'No Data Available',
 };
-  
