@@ -1,9 +1,11 @@
 import { Item } from '@/types/interface';
 
 export const selectBoxDefaultItems: Item[] = [
+  { label: 'Vue.js', value: 'vue' },
   { label: 'JavaScript', value: 'javascript' },
   { label: 'TypeScript', value: 'typescript' },
-  { label: 'Vue.js', value: 'vue' },
+  { label: 'Node', value: 'node' },
+  { label: 'React', value: 'react' },
 ];
 
 export const defaultSelectedItem: Item[] = [
