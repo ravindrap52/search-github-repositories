@@ -93,7 +93,7 @@ To start the development server, run:
 ```bash
 npm run dev
 ```
-#### Browser will open and it navigate to http://localhost:5173.
+#### Browser will open and it navigate to http://localhost:9000/#/
 
 ### Building for Production
 To build the project for production, use:
