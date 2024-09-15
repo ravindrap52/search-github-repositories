@@ -55,6 +55,6 @@ const { data, error, isFetching, isError } =
   <LoadingSkeleton v-if="isFetching" />
   <span v-else-if="isError">Error: {{ error?.message }}</span>
   <div v-for="(repositories, index) in data.pages" :key="index" v-else-if="data">
-    <ListItem :repos="repositories?.items || []" />
+    <ListItem :repoName="props.repositoryName" :repos="repositories?.items || []" />
   </div>
 </template>
