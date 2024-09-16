@@ -18,9 +18,9 @@
     </Header>
     <!-- imagine side bar is like a container, sidebar will have a drawer, and drawer will have a form
     and form contains filter item -->
-      <BaseDrawer v-model="leftDrawerOpen">
-        <BaseForm />
-      </BaseDrawer>
+    <BaseDrawer v-model="leftDrawerOpen">
+      <BaseForm />
+    </BaseDrawer>
     <!-- displaying the route content -->
     <q-page-container>
       <router-view />
@@ -43,5 +43,4 @@ function toggleLeftDrawer() {
   console.log(1, leftDrawerOpen.value);
   leftDrawerOpen.value = !leftDrawerOpen.value;
 }
-
 </script>

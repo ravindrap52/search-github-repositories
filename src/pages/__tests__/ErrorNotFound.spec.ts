@@ -19,6 +19,6 @@ describe('ErrorNotFound', () => {
     const wrapper = mount(ErrorNotFound);
     const [button] = wrapper.findAll('button');
     button.trigger('clcik');
-    expect(location.pathname).toBe('/')
-  })
+    expect(location.pathname).toBe('/');
+  });
 });

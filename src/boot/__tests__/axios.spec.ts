@@ -1,10 +1,8 @@
-
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 
 import { HttpService } from '@/boot/axios';
-
 
 describe('HttpService', () => {
   let httpService: HttpService;

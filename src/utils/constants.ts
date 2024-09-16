@@ -8,9 +8,7 @@ export const selectBoxDefaultItems: Item[] = [
   { label: 'React', value: 'react' },
 ];
 
-export const defaultSelectedItem: Item[] = [
-  { label: 'Vue.js', value: 'vue' },
-];
+export const defaultSelectedItem: Item[] = [{ label: 'Vue.js', value: 'vue' }];
 
 //TODO:
 // this should come from settings page,

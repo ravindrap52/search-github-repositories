@@ -3,7 +3,7 @@ import { date } from 'quasar';
 import type { DateParams } from '@/types/interface';
 
 export function getFormattedDate({ dateParam, dateFormat, options = {} }: DateParams): string {
-  if(!dateParam) {
+  if (!dateParam) {
     throw new Error('Invalid date parameter');
   }
   let formattedDate = '';

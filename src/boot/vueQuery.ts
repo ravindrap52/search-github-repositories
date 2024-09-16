@@ -5,4 +5,3 @@ export default boot(({ app }) => {
   // Set vue query instance on app
   app.use(VueQueryPlugin);
 });
-

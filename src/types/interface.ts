@@ -70,7 +70,7 @@ export interface DateProps {
 // form props
 export interface FilterForm {
   searchByDefaultRepositories: Item[];
-  selectedRepository : Item[];
+  selectedRepository: Item[];
   searchByStars: number;
   startDate: string;
   endDate: string;

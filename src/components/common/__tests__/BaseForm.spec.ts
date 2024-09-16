@@ -49,12 +49,11 @@ describe('BaseForm Component', () => {
       global: {
         plugins: [createTestingPinia()],
       },
-
     });
     // const buttonElement = wrapper.find('.q-btn');
     const formElement = wrapper.find('.q-form');
-    const spyOnForm = vi.spyOn(formElement, 'trigger')
-    await formElement.trigger('click')
-    expect(spyOnForm).toHaveBeenCalledOnce()
+    const spyOnForm = vi.spyOn(formElement, 'trigger');
+    await formElement.trigger('click');
+    expect(spyOnForm).toHaveBeenCalledOnce();
   });
 });

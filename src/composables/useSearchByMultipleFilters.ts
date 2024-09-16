@@ -1,5 +1,5 @@
 import { HttpService } from '@/boot/axios';
-import  type { GitHubRepository } from '@/types/interface';
+import type { GitHubRepository } from '@/types/interface';
 
 interface ApiParams {
   repositoryName: string;

@@ -2,7 +2,7 @@
 import type { ButtonProps } from '@/types/interface';
 
 // Define component props
-  withDefaults(defineProps<ButtonProps>(), {
+withDefaults(defineProps<ButtonProps>(), {
   type: 'button',
   size: 'md',
   flat: false,

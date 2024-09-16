@@ -10,7 +10,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/:catchAll(.*)*',
     component: () => import('@/pages/ErrorNotFound.vue'),
-    name: 'not found'
+    name: 'not found',
   },
 ];
 

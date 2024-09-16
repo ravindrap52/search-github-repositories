@@ -16,14 +16,13 @@ withDefaults(defineProps<InputProps>(), {
 // define emit
 const emit = defineEmits<{ 'update:modelValue': [value: string | number | null] }>();
 
-
 // model value for input items
 const internalModelValue = ref<string | number | null>('');
 
 // handling the input value
 function updateInputValue(value: string | number | null) {
   internalModelValue.value = value;
-  emit('update:modelValue', value)
+  emit('update:modelValue', value);
 }
 </script>
 
