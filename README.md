@@ -105,3 +105,25 @@ To test the project, use:
 ```bash
 npm run test:unit
 ```
+## Accomplishments
+- **Strong Linting for TypeScript**
+- **Reusable Components**
+- **i18n Strings**
+- **Server-Side Caching with VueQuery**: Reduces network calls and improves performance by caching data.
+- **Pinia for State Management**
+- **Typings and Interfaces**
+- **Environment-Specific Files**
+- **Tailwind for Utility Classes**
+
+## Areas for Improvement
+1. **More Test Cases**
+
+2. **Responsiveness**
+
+3. **Animation Improvements**
+
+
+4. **Smooth Infinite Scroll**
+
+
+
